@@ -31,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/Golf_Journal/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+            <state relative-caret-position="136">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -324,7 +324,7 @@
       <workItem from="1552492354861" duration="2353000" />
       <workItem from="1552650742005" duration="1251000" />
       <workItem from="1552904979299" duration="10459000" />
-      <workItem from="1553182360777" duration="10139000" />
+      <workItem from="1553182360777" duration="10219000" />
     </task>
     <task id="LOCAL-00001" summary="test for python anywhere">
       <created>1553285860594</created>
@@ -333,11 +333,18 @@
       <option name="project" value="LOCAL" />
       <updated>1553285860598</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="test for python anywhere">
+      <created>1553287271387</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1553287271387</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84912000" />
+    <option name="totallyTimeSpent" value="84992000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1927" y="-119" width="1550" height="838" extended-state="6" />
@@ -723,8 +730,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/Golf_Journal/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+        <state relative-caret-position="136">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
         </state>
       </provider>
     </entry>
