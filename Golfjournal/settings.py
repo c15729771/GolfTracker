@@ -100,10 +100,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'golfuser',
-        'USER': 'golfuser',
-        'HOST': 'golftrack.caoy6jljrzwd.us-east-2.rds.amazonaws.com',
+        'USER': 'super',
+        'HOST': 'c15729771-1096.postgres.pythonanywhere-services.com',
         'PASSWORD':'Fionn0408',
-        'PORT': '5432',
+        'PORT': '11096',
     }
 }
 
