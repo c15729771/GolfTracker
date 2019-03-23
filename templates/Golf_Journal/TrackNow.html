@@ -1,24 +1,28 @@
 {% extends 'Golf_Journal/base.html' %}
 {% block head %}
+            <div class="tracking">
+        <h1>Track Your Game</h1>
+    </div>
 
-{% endblock %}
-{% block content %}
-    <h1> Track Now </h1>
-    <button onclick="getLocation()">Try It</button>
+    <div id="map">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-          crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-            crossorigin=""></script>
-    <style>
-        #map {
-            height: 50%
-        }
-    </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+              integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+              crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+                    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+                    crossorigin="">
 
-    <div id="map" style="width:100%;height:450px;"></div>
+        </script>
+
+    </div>
+    <div class="trackNow">
+        <button class="btn" onclick="getLocation()">Try It</button>
+    </div>
+
+    <footer>
+        <p>GolfJournal, Copyright &copy; 2019</p>
+    </footer>
 
     <script>
 
@@ -148,4 +152,7 @@
 
 
     </script>
+{% endblock %}
+{% block content %}
+
 {% endblock content %}

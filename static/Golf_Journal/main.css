@@ -1,5 +1,9 @@
-body {
+html {
+  position: relative;
+  min-height: 100%;
+}
 
+body {
   font: 15px/1.5 sans-serif;
   padding: 0;
   margin: 0;
@@ -15,6 +19,15 @@ ul {
   padding: 0;
 }
 
+.button_1{
+	height: 38px;
+	background: #e8491d;
+	border: none;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #FFFFFF;
+}
+
 /* Global */
 .container1{
 	width: 80%;
@@ -22,67 +35,57 @@ ul {
 	overflow: hidden;
 }
 
+/* Header */
+header nav{
+	border-bottom: orange 3px solid;
+}
+
 /* Showcase */
 #showcase{
 	min-height: 61.5vh;
-    background-image: linear-gradient(to right bottom, rgba(104, 92, 121, 0.5), rgba(69, 92, 123, 0.5)), url('images/icons/background.jpg');
+    /*background-image: linear-gradient(to right bottom, rgba(104, 92, 121, 0.6), rgba(69, 92, 123, 0.6)), url('images/icons/background.jpg');*/
+    background-image: linear-gradient(to right bottom, rgba(18, 16, 20, 0.6), rgba(24, 32, 43, 0.6)), url('images/icons/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat:no-repeat;
-	text-align: center;
-	color: #FFFFFF;
+	  text-align: center;
+	  color: #FFFFFF;
     border-top: orange 3px solid;
     border-bottom: orange 3px solid;
 }
 
 #showcase h1{
-	margin-top: 100px;
+	margin-top: 150px;
 	font-size: 55px;
-	margin-bottom: 10px;
+  margin-bottom: 10px;
+  font-family: 'Monoton', cursive;
 }
 
 #showcase p{
-	font-size: 20px;
+  font-size: 22px;
+  margin-top: 36px;
+  font-family: 'Lilita One', cursive;
+  letter-spacing: .5px;
 }
-
-/*Newsletter */
-#newsletter{
-	padding: 15px;
-	color: #FFFFFF;
-	background: green;
-}
-
-#newsletter h1{
-	float:left;
-}
-
-#newsletter form{
-	float:right;
-	margin-right: 15px;
-}
-
-#newsletter input[type="email"]{
-	padding: 4px;
-	height: 25px;
-	width: 250px;
-}
+/* Showcase end */
 
 /* Boxes */
 #boxes{
-	margin-top:20px;
+  margin-top:20px;
+  padding-bottom: 60px;
 }
 
 #boxes .box{
 	float: left;
 	text-align: center;
 	width: 33%;
-	padding: 20px;
-
+  padding: 20px;
 }
 
-#boxes .box img{
+#boxes .box .fas{
 	width: 90px;
 }
+/* Boxes end */
 
 a {
   font-size: 18px;
@@ -102,6 +105,7 @@ a {
 
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
+	color: orange;
 }
 
 .content-section {
@@ -134,7 +138,7 @@ a.article-title:hover {
 .article-metadata {
   padding-bottom: 1px;
   margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+  border-bottom: 1px solid #e3e3e3;
 }
 
 .article-metadata a:hover {
@@ -159,12 +163,403 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
+.fas{
+  margin-top: 10px;
+}
+
+#boxes p{
+  margin-top: 15px;
+}
+
+/* Tracking */
+
+.tracking{
+	text-align: center;
+  margin-top: 100px;
+}
+
+.tracking h1 {
+  text-align: center;
+  color: #45BF55;
+  font-family: 'Faster One', cursive;
+}
+
+/* Map */
+
+#map {
+  height: 50%;
+  margin: 60px auto 50px auto;
+  width:50%;
+  height:450px;
+  border: 2px solid orange;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.20);
+}
+
+/* buttons */
+
+.trackNow {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 60px;
+}
+
+.btn {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 35px;
+  border-radius: 100px;
+  transition: all .2s;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  text-align: center;
+  background-color: #45BF55;
+  color: #fff;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.20);
+}
+
+.btn::after { /* when we hover the button, we want some styles to show using the after pseudo element */
+  transform: scaleX(1.4) scaleY(1.6); /* scales the size of the effect */
+  opacity: 0; /* fades out the after pseudo element button whn hovered - basically sets opacity invisble */
+}
+
+.btn:active { /* active here is when a button is 'clicked' */
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.20);
+}
+/* Buttons end */
+
+/* Sidebar */
+aside#sidebar{
+	float:right;
+	width:30%;
+	margin-top:55px;
+}
+
+aside#sidebar .quote input, aside#sidebar .quote textarea{
+	width: 90%;
+	padding:5px;
+}
+/* Sidebar end */
+
+/* main-col */
+
+#main {
+  margin-top: 55px;
+  margin-bottom: 110px;
+}
+article#main-col{
+	float:left;
+	width:65%;
+}
+
+/* About */
+ul#services li{
+  list-style: none;
+	padding: 35px;
+	border: orange solid 1px;
+	margin-bottom: 5px;
+  background: #e6e6e6;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.10);
+}
+
+ul#default li{
+  list-style: none;
+	margin-bottom: 5px;
+}
+
+.page-title {
+padding-top: 50px;
+padding-bottom: 10px;
+font-family: 'Faster One', cursive;
+text-align: center;
+color: #45BF55;
+}
+
+.about-title {
+  padding-top: 20px;
+  padding-bottom: 5px;
+  font-family: 'Faster One', cursive;
+  color: #45BF55;
+  }
+/* About end */
+
+  /* My Courses */
+
+  .wrapper.fullscreen {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -moz-flex-direction: column;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  #intro.mycourses {
+    min-height: 61.5vh;
+		background-attachment: fixed;
+		background-image: linear-gradient(to right bottom, rgba(18, 16, 20, 0.6), rgba(24, 32, 43, 0.6)), url("images/icons/my-courses2.jpg");
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		clip-path: polygon(0 0, 100% 0, 100% 45vh, 0 100%);
+  }
+
+  #intro h1 {
+    font-weight: 600;
+    font-size: 5em;
+    text-shadow: 2px 2px #FFBC67;
+    text-align: center;
+  }
+
+  .mycourses-primary {
+    text-transform: uppercase;
+  }
+
+  .mycourses-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 15px;
+    color: #fff;
+    font-family: "Lato";
+    margin-bottom: 70px;
+    text-shadow: none;
+    text-align: center;
+  }
+  /* My Courses end */
+
+  /* Community Courses */
+
+  #intro.community {
+    min-height: 61.5vh;
+		background-attachment: fixed;
+		background-image: linear-gradient(to right bottom, rgba(18, 16, 20, 0.6), rgba(24, 32, 43, 0.6)), url("images/icons/community-courses.jpg");
+		background-position: bottom center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		clip-path: polygon(0 0, 100% 0, 100% 45vh, 0 100%);
+  }
+
+  .community-primary {
+    text-transform: uppercase;
+  }
+
+  .community-primary-main {
+    display: block;
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    color: #fff;
+    font-family: "Lato";
+    margin-bottom: 60px;
+    text-shadow: none;
+    text-align: center;
+  }
+  /* Community Courses end */
+
+  /* Footer */
 footer{
-	padding: 20px;
-	margin-top: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 20px;
+  margin-top: 42px;
+  width: 100%;
 	color: #FFFFFF;
 	background-color: green;
 	text-align: center;
-    background-image: linear-gradient(to right, #45BF55, green);
-
+  background-image: linear-gradient(to right, #45BF55, green);
 }
+
+footer p{
+  padding-top: 10px;
+}
+
+/* Footer End */
+
+
+
+
+
+
+/*body {*/
+
+  /*font: 15px/1.5 sans-serif;*/
+  /*padding: 0;*/
+  /*margin: 0;*/
+  /*background-color: #f4f4f4;*/
+/*}*/
+
+/*h1, h2, h3, h4, h5, h6 {*/
+  /*!*color: #444444;*!*/
+/*}*/
+
+/*ul {*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+/*}*/
+
+/*!* Global *!*/
+/*.container1{*/
+	/*width: 80%;*/
+	/*margin:auto;*/
+	/*overflow: hidden;*/
+/*}*/
+
+/*!* Showcase *!*/
+/*#showcase{*/
+	/*min-height: 61.5vh;*/
+    /*background-image: linear-gradient(to right bottom, rgba(104, 92, 121, 0.5), rgba(69, 92, 123, 0.5)), url('images/icons/background.jpg');*/
+    /*background-size: cover;*/
+    /*background-position: center;*/
+    /*background-repeat:no-repeat;*/
+	/*text-align: center;*/
+	/*color: #FFFFFF;*/
+    /*border-top: orange 3px solid;*/
+    /*border-bottom: orange 3px solid;*/
+/*}*/
+
+/*#showcase h1{*/
+	/*margin-top: 100px;*/
+	/*font-size: 55px;*/
+	/*margin-bottom: 10px;*/
+/*}*/
+
+/*#showcase p{*/
+	/*font-size: 20px;*/
+/*}*/
+
+/*!*Newsletter *!*/
+/*#newsletter{*/
+	/*padding: 15px;*/
+	/*color: #FFFFFF;*/
+	/*background: green;*/
+/*}*/
+
+/*#newsletter h1{*/
+	/*float:left;*/
+/*}*/
+
+/*#newsletter form{*/
+	/*float:right;*/
+	/*margin-right: 15px;*/
+/*}*/
+
+/*#newsletter input[type="email"]{*/
+	/*padding: 4px;*/
+	/*height: 25px;*/
+	/*width: 250px;*/
+/*}*/
+
+/*!* Boxes *!*/
+/*#boxes{*/
+	/*margin-top:20px;*/
+/*}*/
+
+/*#boxes .box{*/
+	/*float: left;*/
+	/*text-align: center;*/
+	/*width: 33%;*/
+	/*padding: 20px;*/
+
+/*}*/
+
+/*#boxes .box img{*/
+	/*width: 90px;*/
+/*}*/
+
+/*a {*/
+  /*font-size: 18px;*/
+/*}*/
+
+/*.bg-steel {*/
+  /*background-image: linear-gradient(to right, #45BF55, green);*/
+/*}*/
+/*.site-header .navbar-nav .nav-link {*/
+  /*!* background-image: url('images/background.jpg') no-repeat; *!*/
+  /*color: #ffffff;*/
+/*}*/
+
+/*.site-header .navbar-nav .nav-link:hover {*/
+  /*color: orange;*/
+/*}*/
+
+/*.site-header .navbar-nav .nav-link.active {*/
+  /*font-weight: 500;*/
+/*}*/
+
+/*.content-section {*/
+  /*background: orange;*/
+  /*padding: 10px 20px;*/
+  /*border: 16px solid #dddddd;*/
+  /*border-radius: 3px;*/
+  /*margin-bottom: 20px;*/
+/*}*/
+
+/*.article-title {*/
+  /*color: #444444;*/
+/*}*/
+
+/*a.article-title:hover {*/
+  /*color: #428bca;*/
+  /*text-decoration: none;*/
+/*}*/
+
+/*.article-content {*/
+  /*white-space: pre-line;*/
+/*}*/
+
+/*.article-img {*/
+  /*height: 65px;*/
+  /*width: 65px;*/
+  /*margin-right: 16px;*/
+/*}*/
+
+/*.article-metadata {*/
+  /*padding-bottom: 1px;*/
+  /*margin-bottom: 4px;*/
+  /*border-bottom: 1px solid #e3e3e3*/
+/*}*/
+
+/*.article-metadata a:hover {*/
+  /*color: #333;*/
+  /*text-decoration: none;*/
+/*}*/
+
+/*.article-svg {*/
+  /*width: 25px;*/
+  /*height: 25px;*/
+  /*vertical-align: middle;*/
+/*}*/
+
+/*.account-img {*/
+  /*height: 125px;*/
+  /*width: 125px;*/
+  /*margin-right: 20px;*/
+  /*margin-bottom: 16px;*/
+/*}*/
+
+/*.account-heading {*/
+  /*font-size: 2.5rem;*/
+/*}*/
+
+/*footer{*/
+	/*padding: 20px;*/
+	/*margin-top: 20px;*/
+	/*color: #FFFFFF;*/
+	/*background-color: green;*/
+	/*text-align: center;*/
+    /*background-image: linear-gradient(to right, #45BF55, green);*/
+
+/*}*/
