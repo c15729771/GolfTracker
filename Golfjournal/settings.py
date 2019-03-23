@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'Golfjournal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'golfuser',
+        'NAME': 'super',
         'USER': 'super',
         'HOST': 'c15729771-1096.postgres.pythonanywhere-services.com',
         'PASSWORD':'Fionn0408',
