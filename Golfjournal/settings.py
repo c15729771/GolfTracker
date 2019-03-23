@@ -148,6 +148,6 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT ='/home/c15729771/GolfTracker/static'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static")
+# ]
