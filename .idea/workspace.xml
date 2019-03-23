@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a4057f61-f014-433c-b633-1cc76eb6e020" name="Default Changelist" comment="html updaten">
+    <list default="true" id="a4057f61-f014-433c-b633-1cc76eb6e020" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Golf_Journal/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Golf_Journal/about.html" afterDir="false" />
     </list>
@@ -62,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/templates/Golf_Journal/about.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
-              <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+              <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
               <folding>
                 <element signature="e#3133#3139#0#HTML" expanded="true" />
               </folding>
@@ -386,7 +386,7 @@
       <workItem from="1552492354861" duration="2353000" />
       <workItem from="1552650742005" duration="1251000" />
       <workItem from="1552904979299" duration="10459000" />
-      <workItem from="1553182360777" duration="20773000" />
+      <workItem from="1553182360777" duration="21405000" />
     </task>
     <task id="LOCAL-00001" summary="test for python anywhere">
       <created>1553285860594</created>
@@ -423,24 +423,38 @@
       <option name="project" value="LOCAL" />
       <updated>1553346182664</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="html updaten">
+      <created>1553346242723</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1553346242723</updated>
+    </task>
+    <task id="LOCAL-00007" summary="html updaten">
+      <created>1553346745434</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1553346745434</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95546000" />
+    <option name="totallyTimeSpent" value="96178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49796748" visible="true" weight="0.2744898" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49796748" visible="true" weight="0.2744898" />
       <window_info id="Favorites" order="1" sideWeight="0.5020325" side_tool="true" weight="0.19530201" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.4979592" visible="true" weight="0.33060557" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.4979592" weight="0.33060557" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.5020408" side_tool="true" weight="0.19476268" />
       <window_info anchor="bottom" id="Version Control" order="3" sideWeight="0.4989796" weight="0.32733223" />
-      <window_info anchor="bottom" id="manage.py@Golfjournal" order="4" weight="0.21767594" />
+      <window_info active="true" anchor="bottom" id="manage.py@Golfjournal" order="4" visible="true" weight="0.21767594" />
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32719547" />
@@ -487,7 +501,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test for python anywhere" />
     <MESSAGE value="html update" />
-    <option name="LAST_COMMIT_MESSAGE" value="html update" />
+    <MESSAGE value="html updaten" />
+    <option name="LAST_COMMIT_MESSAGE" value="html updaten" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -823,7 +838,7 @@
     <entry file="file://$PROJECT_DIR$/templates/Golf_Journal/about.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+          <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
           <folding>
             <element signature="e#3133#3139#0#HTML" expanded="true" />
           </folding>
