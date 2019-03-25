@@ -1,5 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from .models import Member
 
 #
 # posts = [
@@ -17,9 +17,6 @@ from django.shortcuts import render
 #     }
 # ]
 def index(request):
-    # context = {
-    #     'posts': posts
-    # }
     return render(request, 'Golf_Journal/index.html', {'title': 'index'})
 
 
@@ -37,3 +34,32 @@ def CommunityCourses(request):
 
 def MyCourses(request):
     return render(request, 'Golf_Journal/MyCourses.html', {'title': 'MyCourses'})
+
+def create(request):
+    member = Member(firstname=request.POST['firstname'], lastname=request.POST['lastname'])
+    member.save()
+    return redirect('/')
+
+def read(request):
+    members = Member.objects.all()
+    context = {'members': members}
+    return render(request, 'Golf_Journal/result.html', context)
+
+def edit(request, id):
+    members = Member.objects.get(id=id)
+    context = {'member': members}
+    return render(request, 'Golf_Journal/edit.html', context)
+
+
+def update(request, id):
+    member = Member.objects.get(id=id)
+    member.firstname = request.POST['firstname']
+    member.lastname = request.POST['lastname']
+    member.save()
+    return redirect('/Golf_Journal/')
+
+
+def delete(request, id):
+    member = Member.objects.get(id=id)
+    member.delete()
+    return redirect('/Golf_Journal/')

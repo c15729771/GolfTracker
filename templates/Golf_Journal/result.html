@@ -1,0 +1,18 @@
+<table class="table table-bordered">
+    <thead class="alert-success">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.firstname }}</td>
+            <td>{{ member.lastname }}</td>
+            <td><center><a class="btn btn-sm btn-warning edit" name="{{ member.id }}">Edit</a> <a class="btn btn-sm btn-danger delete" name="{{ member.id }}">Delete</a></center></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

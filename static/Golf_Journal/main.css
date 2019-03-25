@@ -216,6 +216,10 @@ a.article-title:hover {
   color: #fff;
 }
 
+.btn-destructive {
+    background-color: red;
+}
+
 .btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.20);
