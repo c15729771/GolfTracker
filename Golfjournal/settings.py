@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*', ]
 
 INSTALLED_APPS = [
     'GolfTracker',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -149,6 +150,17 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT ='/home/c15729771/GolfTracker/static'
 
+# for profile pics uploaded by users
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# how we are going to access the images within the browser
+
+MEDIA_URL = '/media/'
+
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static")
 # ]
+
+LOGIN_REDIRECT_URL = 'Golf-Journal-TrackNow'
+LOGIN_URL = '/login/'

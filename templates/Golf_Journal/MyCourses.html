@@ -1,5 +1,5 @@
-
 {% extends 'Golf_Journal/base.html' %}
+{% load static %}
 {% block head %}
     <section id="intro" class="wrapper style1 fullscreen fade-up mycourses">
         <div class="inner">
@@ -15,5 +15,10 @@
 {% endblock %}
 
 {% block content %}
-
+<div id="golfCourseTable"></div>
 {% endblock content %}
+
+{% block js %}
+    {{ block.super }} {# includes previous content in block #}
+    <script src="{% static 'Golf_Journal/js/myCoursesScript.js' %}"></script>
+{% endblock js %}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 
 
 class Post(models.Model):
@@ -15,3 +16,26 @@ class Member(models.Model):
 
     def __str__(self):
         return self.firstname + " " + self.lastname
+
+class Game(models.Model):
+    user = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
+    courseName = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    notes = models.CharField(max_length=1000)
+    datePlayed = models.DateField()
+
+class Hole(models.Model):
+    HOLE_NUMBERS = (
+        ('1', 'Hole 1'),
+        ('2', 'Hole 2'),
+        ('3', 'Hole 3'),
+        ('4', 'Hole 4'),
+        ('5', 'Hole 5'),
+        ('6', 'Hole 6'),
+        ('7', 'Hole 7'),
+    )
+    game = models.ForeignKey('Game', on_delete=models.CASCADE)
+    hole_number = models.CharField(max_length=1, choices=HOLE_NUMBERS)
+    start_time = models.DateTimeField()
+    stop_time = models.DateTimeField()
+    geo_codes = ArrayField(models.DecimalField(max_digits=9, decimal_places=6))

@@ -111,9 +111,43 @@ a {
 .content-section {
   background: orange;
   padding: 10px 20px;
-  border: 16px solid #dddddd;
+  border: 4px solid #dddddd;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.20);
   border-radius: 3px;
   margin-bottom: 20px;
+  margin-top: 120px;
+}
+
+.content-section-a {
+  background: orange;
+  padding: 20px;
+  border: 4px solid #dddddd;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.20);
+  border-radius: 3px;
+  margin-top: 120px;
+  margin-bottom: 20px;
+}
+
+.account-heading{
+    color: white;
+    font-family: Lato;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+}
+
+.text-secondary{
+    color: white;
+    font-family: Lato;
+    font-size: 14px;
+    text-decoration: underline;
+    letter-spacing: 2px;
+}
+
+legend{
+    color: white;
+        font-size: 28px;
+    font-family: 'Faster One', cursive;
 }
 
 .article-title {
@@ -210,7 +244,7 @@ a.article-title:hover {
   border-radius: 100px;
   transition: all .2s;
   margin: 0 auto;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   text-align: center;
   background-color: #45BF55;
   color: #fff;
@@ -361,9 +395,9 @@ color: #45BF55;
 
   .community-primary-main {
     display: block;
-    font-size: 50px;
+    font-size: 45px;
     font-weight: 700;
-    letter-spacing: 10px;
+    letter-spacing: 9px;
     color: #fff;
     font-family: "Lato";
     margin-bottom: 60px;
@@ -386,9 +420,27 @@ footer{
   background-image: linear-gradient(to right, #45BF55, green);
 }
 
+.footerMap{
+  position: relative;
+  left: 0;
+  bottom: 0;
+  padding: 20px;
+  margin-top: 30px;
+  width: 100%;
+	color: #FFFFFF;
+	background-color: green;
+	text-align: center;
+  background-image: linear-gradient(to right, #45BF55, green);
+}
+
 footer p{
   padding-top: 10px;
 }
+
+.pMap{
+  padding-top: 10px;
+}
+
 
 /* Footer End */
 
