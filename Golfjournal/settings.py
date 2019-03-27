@@ -128,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -164,3 +163,12 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'Golf-Journal-TrackNow'
 LOGIN_URL = '/login/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'killianwalsh90@gmail.com'
+EMAIL_HOST_PASSWORD = 'obhmoidcicjquamf'
+
+

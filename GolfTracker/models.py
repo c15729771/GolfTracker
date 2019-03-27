@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
+from django.conf import settings
 
 
 class Post(models.Model):
@@ -18,7 +19,7 @@ class Member(models.Model):
         return self.firstname + " " + self.lastname
 
 class Game(models.Model):
-    user = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     courseName = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     notes = models.CharField(max_length=1000)

@@ -13,14 +13,14 @@
         <!-- csrf token protexts the form against certain attacks -->
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Your Info</legend>
-                {{ u_form|crispy }}
-                {{ p_form|crispy }}<!-- renders form in paragraph tags -->
+          <legend class="border-bottom mb-4">Update your info here</legend>
+           {{ u_form|crispy }}
+           {{ p_form|crispy }}<!-- renders form in paragraph tags -->
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Update</button>
+          <button class="btn btn-outline-info" type="submit">Update</button>
         </div>
-    </form>
+      </form>
 </div>
 
 <footer>

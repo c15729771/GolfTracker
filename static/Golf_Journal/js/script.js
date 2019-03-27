@@ -56,7 +56,7 @@ $(document).ready(function(){
         }
 
     });
-
+/*
     $(document).on('click', '.delete', function(){
         $id = $(this).attr('name');
         $.ajax({
@@ -70,7 +70,7 @@ $(document).ready(function(){
                 alert("Deleted!");
             }
         });
-    });
+    });*/
 
 });
 

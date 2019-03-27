@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Member, Game
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
+import datetime
 #
 # posts = [
 #     {
@@ -44,6 +45,22 @@ def create(request):
     member.save()
     return redirect('/')
 
+def createGameEntry(request):
+    game = Game(
+        user = User(id=request.user.id) ,
+        courseName=request.POST.get('courseName', 'Default'),
+        location=request.POST['courseLocation'],
+        datePlayed=request.POST.get('datePlayed', datetime.date.today())
+    )
+    game.save()
+    return redirect('/')
+
+def deleteGameEntry(request):
+    id = request.POST.get('id', '')
+    game = Game.objects.get(id=id)
+    game.delete()
+    return redirect('/')
+
 def read(request):
     members = Member.objects.all()
     context = {'members': members}
@@ -51,7 +68,7 @@ def read(request):
 
 #Returns the Golf Games currently stored in the system
 def getGameEntries(request):
-    games = Game.objects.all()
+    games = Game.objects.filter(user=request.user.id)
     context = {'games': games}
     return render(request, 'Golf_Journal/GolfCourseTable.html', context)
 

@@ -9,13 +9,55 @@
         </div>
     </section>
 
-	<footer>
-		<p>GolfJournal, Copyright &copy; 2019</p>
-	</footer>
 {% endblock %}
 
 {% block content %}
-<div id="golfCourseTable"></div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCourseModal">Add New Course</button>
+
+    <!-- Table for displaying users current golf courses -->
+    <div id="golfCourseTable"></div>
+
+    <!-- Modal for allowing users to create new course-->
+    <div class="modal fade bd-example-modal-lg" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add New Course</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="courseNameInput">Course Name</label>
+                <input type="text" class="form-control" id="courseNameInput" aria-describedby="emailHelp" placeholder="Enter Course Name" required>
+                <div class="invalid-feedback">
+                    Please choose a username.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="locationInput">Location</label>
+                <input type="text" class="form-control" id="locationInput" placeholder="Enter Location" required>
+              </div>
+              <div class="form-group">
+                  <label for="courseDateInput">Date</label>
+                  <input type="date" class="form-control" id="courseDateInput" required>
+              </div>
+              <div class="form-group">
+                <label for="notesInput">Notes</label>
+                <textarea class="form-control" id="notesInput" rows="3"></textarea>
+              </div>
+            </form
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="createCourseButton" type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--END Modal -->
 {% endblock content %}
 
 {% block js %}

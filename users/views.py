@@ -13,33 +13,31 @@ def register(request):
         if form.is_valid():
             form.save()  # Saves entered user to admin page
             username = form.cleaned_data.get('username')
-            messages.success(request, f'You have registered and are now able to login!')
+            messages.success(request, f'You are now registered and can now able login!')
             return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
 @login_required
-def myprofile(request):
+def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
-                                   instance=request.user.myprofile)
-    if u_form.is_valid() and p_form.is_valid():
-        u_form.save()
-        p_form.save()
-        messages.success(request, f'You have successfully updated your account!!')
-        return redirect('myprofile')
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'You have updated your account!')
+            return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.myprofile)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
         'p_form': p_form
     }
 
-    return render(request, 'mycourses.html', context)
-
-
+    return render(request, 'users/profile.html', context)
