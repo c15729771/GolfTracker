@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Member, Game
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http.response import JsonResponse
+from .models import Member, Game
 import datetime
 #
 # posts = [
@@ -71,6 +72,12 @@ def getGameEntries(request):
     games = Game.objects.filter(user=request.user.id)
     context = {'games': games}
     return render(request, 'Golf_Journal/GolfCourseTable.html', context)
+
+#Returns a golf game record by Id
+def getGameEntryById(request):
+    gameId = request.POST.get('gameId', 'Default')
+    game = Game.objects.filter(id=gameId)[:1][0]
+    return JsonResponse({'success':True, 'gameName':game.courseName})
 
 def edit(request, id):
     members = Member.objects.get(id=id)

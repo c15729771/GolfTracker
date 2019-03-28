@@ -5,6 +5,28 @@ var watchId; //The Id of the Geolocation watcher, needed to turn off watching(i.
 window.onload = function(){
     getCurrentLocation();
     showStartTrackingButton();
+    getGameRecordById();
+}
+/*
+    @Description    Makes an AJAX call to Postgres database to retrieve current users Game entry by Id
+*/
+function getGameRecordById(){
+    $urlGameId = getUrlParam('gameId');
+    if($urlGameId != ''){
+        $csrfToken = getCookie('csrftoken');
+        $.ajax({
+    		url: 'getGameEntryById',
+    		type: 'POST',
+    		async: true,
+    		data:{
+    			gameId: $urlGameId,
+    			csrfmiddlewaretoken: $csrfToken
+    		},
+    		success: function(response){
+    			replaceHeader(response.gameName);
+    		}
+        });
+    }
 }
 
 /*
@@ -156,4 +178,40 @@ function setCustomGpsMarker(map, latitude, longitude, imageName){
     return marker;*/
     var marker = L.marker([latitude, longitude]).addTo(map);
     return marker;
+}
+
+function getUrlParam(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
+/*
+    @Description    Retrieves a any cookie from browser by name
+*/
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+/*
+    @Description    Replaces the header with the value provided
+*/
+function replaceHeader(newHeaderValue){
+    $("#trackingHeaderDiv h1").html(newHeaderValue);
 }

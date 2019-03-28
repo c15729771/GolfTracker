@@ -17,6 +17,7 @@ urlpatterns = [
     path('MyCourses/create', views.create, name='create'),
     path('MyCourses/createGameEntry', views.createGameEntry, name='createGameEntry'),
     path('MyCourses/deleteGameEntry', views.deleteGameEntry, name='deleteGameEntry'),
+    path('TrackNow/getGameEntryById', views.getGameEntryById, name='getGameEntryById'),
     path('', include('pwa.urls')),
     url(r'^create$', views.create, name='create'),
     url(r'^read$', views.read, name='read'),
