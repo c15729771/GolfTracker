@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover" id="courseHoleTableId">
+    <thead class="alert-success">
+        <tr>
+            <th>Hole Number</th>
+            <th>Start Time</th>
+            <th>Stop Time</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hole in holes %}
+        <tr>
+            <td>{{ hole.hole_number }}</td>
+            <td>{{ hole.start_time }}</td>
+            <td>{{ hole.stop_time }}</td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Actions">
+                  <button type="button" name="{{ hole.id }}" class="btn btn-secondary delete delete-hole-event">Delete</button>
+                  <button type="button" name="{{ hole.id }}" class="btn btn-secondary show-on-map-event">Show on Map</button>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

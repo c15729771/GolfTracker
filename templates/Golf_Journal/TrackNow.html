@@ -6,6 +6,9 @@
     </div>
 {% endblock %}
 {% block content %}
+    <!-- Div for table of recorded holes for this course -->
+    <div id="courseHoleTable"></div>
+
     <div class="container fill">
         <div id="map">
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
@@ -13,12 +16,15 @@
                   crossorigin=""/>
         </div>
         <div id="startTrackingDiv" class="trackNow">
-            <button class="btn" onclick="startGeoLocationTracking()">Start Tracking</button>
+            <button class="btn" onclick="renderAddHoleModal()">Start Tracking</button>
         </div>
         <div id="stopTrackingDiv" class="trackNow">
             <button class="btn btn-destructive" onclick="stopGeoLocationTracking()">Stop Tracking</button>
         </div>
     </div>
+
+    <!-- Div to render course hole creation -->
+    <div id='createCourseHoleModalDiv'></div>
 {% endblock content %}
 
 {% block js %}

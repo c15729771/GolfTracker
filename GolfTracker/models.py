@@ -34,9 +34,20 @@ class Hole(models.Model):
         ('5', 'Hole 5'),
         ('6', 'Hole 6'),
         ('7', 'Hole 7'),
+        ('8', 'Hole 8'),
+        ('9', 'Hole 9'),
+        ('10', 'Hole 10'),
+        ('11', 'Hole 11'),
+        ('12', 'Hole 12'),
+        ('13', 'Hole 13'),
+        ('14', 'Hole 14'),
+        ('15', 'Hole 15'),
+        ('16', 'Hole 16'),
+        ('17', 'Hole 17'),
+        ('18', 'Hole 18'),
     )
     game = models.ForeignKey('Game', on_delete=models.CASCADE)
-    hole_number = models.CharField(max_length=1, choices=HOLE_NUMBERS)
+    hole_number = models.CharField(max_length=2, choices=HOLE_NUMBERS)
     start_time = models.DateTimeField()
     stop_time = models.DateTimeField()
     geo_codes = ArrayField(models.DecimalField(max_digits=9, decimal_places=6))
