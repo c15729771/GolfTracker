@@ -111,7 +111,7 @@ def deleteGameHole(request):
 def getHoleCoordinates(request):
     holeId = request.POST.get('id', 'Default')
     hole = Hole.objects.filter(id=holeId)[:1][0]
-    return JsonResponse({'success':True, 'holeGeoCodes':hole.geo_codes})
+    return JsonResponse({'success':True, 'holeGeoCodes':hole.geo_codes, 'holeNumber':hole.hole_number})
 
 def getNewHoleModal(request):
     HOLE_NUMBERS = [

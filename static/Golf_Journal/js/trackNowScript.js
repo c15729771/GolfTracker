@@ -1,14 +1,14 @@
 var geo = navigator.geolocation;
-var mapLineCoordinates = [];//Holds coordinates for moving user, stored as geocode pairs i.e. [[123,123],[124,124]]
 var map; //Class level reference to map object
 var watchId; //The Id of the Geolocation watcher, needed to turn off watching(i.e. tracking)
 var holeName;//class level, for storing the current hole being recorded
 var recordingStartTime;
-var allGeoCodesRenderedOnMap = [];
 var geoCodesCurrentlyBeingTracked = [];
-var lineForSavedCourseHoles;//Used to render a line on the map for saved hole
+var markersLayer; //The markerLayer holds all markers added to the map, used to easily clear
+var trackingStartMarkerDrawn = true; //stores wheter the tracking marker has been drawn or not yet
 
 window.onload = function(){
+    markersLayer = new L.LayerGroup();
     getCurrentLocation();
     showStartTrackingButton();
     getGameRecordById();
@@ -107,7 +107,7 @@ function saveCourseHole(){
     			geo.clearWatch(watchId);
                 showStartTrackingButton();
                 var lastEnteredCoOrds = geoCodesCurrentlyBeingTracked[geoCodesCurrentlyBeingTracked.length-1];
-                createMapMarker(map, 'End', lastEnteredCoOrds[0], lastEnteredCoOrds[1], false);
+                createMapMarker(map, 'Current Location', lastEnteredCoOrds[0], lastEnteredCoOrds[1], false);
                 populateGolfGameHolesTable();
     		}
         });
@@ -164,16 +164,16 @@ function getCoordinatesForHole(event){
     		},
     		success: function(response){
     		    if(response.holeGeoCodes != '' && response.holeGeoCodes.length > 1){
-    		        drawHoleCoordinatesOnMap(response.holeGeoCodes);
+    		        drawHoleCoordinatesOnMap(response.holeGeoCodes, response.holeNumber);
     		    }
     		}
         });
     }
 }
 
-function drawHoleCoordinatesOnMap(geoCodes){
+function drawHoleCoordinatesOnMap(geoCodes, holeNumber){
     var geoCodePairList = convertArrayTo2D(geoCodes);
-    drawGeoCodeListOnMap(geoCodePairList);
+    drawGeoCodeListOnMap(geoCodePairList, holeNumber);
 }
 
 /*
@@ -202,6 +202,9 @@ function getCurrentLocation(){
 */
 function startGeoLocationTracking(){
     console.log('Tracking started!');
+
+    markersLayer.clearLayers();
+    trackingStartMarkerDrawn = false;
     //The success callback method is called whenever a users position is updated
     watchId = geo.watchPosition(setCurrentLocationOnMap, geoInfoErrorCallback, {timeout:10000, enableHighAccuracy:true});
     showStopTrackingButton();
@@ -212,6 +215,8 @@ function startGeoLocationTracking(){
 */
 function stopGeoLocationTracking(){
     console.log('Tracking stopped!');
+    markersLayer.clearLayers();
+    clearLinesFromMap();
     saveCourseHole();
 }
 
@@ -221,7 +226,6 @@ function stopGeoLocationTracking(){
 function initMapWithCurrentLocation(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-    var div = document.getElementById( 'location' );
     initMap(longitude, latitude);
 }
 
@@ -232,6 +236,10 @@ function setCurrentLocationOnMap(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     drawLineOnMap(map, latitude, longitude, geoCodesCurrentlyBeingTracked);
+    if(!trackingStartMarkerDrawn){
+        createMapMarker(map, "Tee Off", latitude, longitude, false);
+        trackingStartMarkerDrawn = true;
+    }
 }
 
 /*
@@ -254,8 +262,9 @@ function initMap(longitude, latitude){
         accessToken: 'pk.eyJ1IjoiYzE1NzI5NzcxIiwiYSI6ImNqb2hkZ3I4MzBpYTEzcG8zdG9menE4aWgifQ.omQRZRZ0uMdYT7Dc-qVXwQ'
     }).addTo(map);
 
-    createMapMarker(map, "Hole 1 Tee off", latitude, longitude, true);
-    drawLineOnMap(map, latitude, longitude, geoCodesCurrentlyBeingTracked);
+    markersLayer.addTo(map);
+
+    createMapMarker(map, "Current Location", latitude, longitude, true);
 }
 
 /*
@@ -265,7 +274,7 @@ function initMap(longitude, latitude){
 function createMapMarker(map, markerMessage, latitude, longitude, startMarker) {
     var marker;
     if(startMarker){
-        marker = marker = setCustomGpsMarker(map, latitude, longitude, 'green_gps_marker.png');
+        marker = setCustomGpsMarker(map, latitude, longitude, 'green_gps_marker.png');
 
     }
     else{
@@ -273,6 +282,7 @@ function createMapMarker(map, markerMessage, latitude, longitude, startMarker) {
     }
     marker.bindPopup(markerMessage);
     marker.on('click', showMarkerBaloon);
+    markersLayer.addLayer(marker);
 }
 
 /*
@@ -292,39 +302,64 @@ function drawLineOnMap(map, latitude, longitude, geoCodeArrayToAddTo) {
     var coordinatePair = [latitude, longitude];
     geoCodeArrayToAddTo.push(coordinatePair);
 
-    var polyline = L.polyline(geoCodeArrayToAddTo,
+    clearLinesFromMap();
+
+    var polyLine = L.polyline(geoCodeArrayToAddTo,
         {
             color: 'blue',
             weight: 3,
             opacity: 5,
-            dashArray: '10,5',
             lineJoin: 'round'
         }
     ).addTo(map);
+
+    var polylineBufferLine = L.polyline(geoCodeArrayToAddTo,
+        {
+            color: 'blue',
+            weight: 23,
+            opacity: 0.3,
+            lineJoin: 'round'
+        }
+    ).addTo(map);
+
+    map.fitBounds(polyLine.getBounds());
 }
 
 /*
     @Description    draws a line on the map based on the geocode values stored in passed geo array
 */
-function drawGeoCodeListOnMap(geoArray) {
+function drawGeoCodeListOnMap(geoArray, holeNumber) {
 
-    console.log('lineForSavedCourseHoles: ' , lineForSavedCourseHoles);
+    clearLinesFromMap();
+    markersLayer.clearLayers();
 
-    if(typeof lineForSavedCourseHoles !== "undefined"){
-        map.removeLayer(lineForSavedCourseHoles);
-    }
-
-    lineForSavedCourseHoles = L.polyline(geoArray,
+    var polyLine = L.polyline(geoArray,
         {
             color: 'blue',
             weight: 3,
             opacity: 5,
-            dashArray: '10,5',
             lineJoin: 'round'
         }
     ).addTo(map);
 
-    map.panTo(new L.LatLng(geoArray[0][0], geoArray[0][1]));
+    //Add the buffer around the polyline
+    L.polyline(geoArray,
+        {
+            color: 'blue',
+            weight: 23,
+            opacity: 0.3,
+            lineJoin: 'round'
+        }
+    ).addTo(map);
+
+    map.fitBounds(polyLine.getBounds());
+
+    var startLat = geoArray[0][0];
+    var startLong = geoArray[0][1];
+    var endLat = geoArray[geoArray.length-1][0];
+    var endLong = geoArray[geoArray.length-1][1];
+    createMapMarker(map, 'Start Hole ' + holeNumber, startLat, startLong, false);
+    createMapMarker(map, 'End Hole ' + holeNumber, endLat, endLong, false);
 }
 
 /*
@@ -355,7 +390,7 @@ function setCustomGpsMarker(map, latitude, longitude, imageName){
     });
     var marker = L.marker([latitude, longitude], {icon: myIcon}).addTo(map);
     return marker;*/
-    var marker = L.marker([latitude, longitude]).addTo(map);
+    var marker = L.marker([latitude, longitude]);
     return marker;
 }
 
@@ -406,7 +441,10 @@ function addTableClickListeners(){
 
     //Register a click listener on all 'show on map' buttons on my holes table
     $(document).on('click', '.show-on-map-event' ,function(event){
-        getCoordinatesForHole(event);
+        if(!$("#stopTrackingDiv").is(":visible")){
+            getCoordinatesForHole(event);
+        }
+        else alert('Please stop tracking first');
     });
 }
 
@@ -423,4 +461,20 @@ function addModalClickListeners(){
         startGeoLocationTracking();
         $('#createCourseHoleModal').modal('hide');
     });
+}
+
+/*
+    @Description    Clear lines from the map
+*/
+function clearLinesFromMap() {
+    for(i in map._layers) {
+        if(map._layers[i]._path != undefined) {
+            try {
+                map.removeLayer(map._layers[i]);
+            }
+            catch(e) {
+                console.log("problem with " + e + map._layers[i]);
+            }
+        }
+    }
 }
