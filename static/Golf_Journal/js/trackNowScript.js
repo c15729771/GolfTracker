@@ -55,6 +55,13 @@ function populateGolfGameHolesTable(){
     		},
     		success: function(response){
     			$('#courseHoleTable').html(response);
+    			$('#courseHoleTableId').DataTable( {
+                    searching: false,
+                    rowReorder: {
+                        selector: 'td:nth-child(2)'
+                    },
+                    responsive: true
+                } );
     		}
         });
     }
@@ -87,7 +94,7 @@ function renderAddHoleModal(){
 function saveCourseHole(){
     $csrfToken = getCookie('csrftoken');
     $urlGameId = getUrlParam('gameId');
-    $holeCoordinates = transformMapGeoCodesToList(geoCodesCurrentlyBeingTracked);
+    $holeCoordinates = convert2DArrayTo1D(geoCodesCurrentlyBeingTracked);
     recordingTime = parseInt(recordingStartTime);
     console.log('recordingTime: ' + recordingTime);
 
@@ -114,7 +121,7 @@ function saveCourseHole(){
     }
 }
 
-function transformMapGeoCodesToList(lineCoordinates){
+function convert2DArrayTo1D(lineCoordinates){
     var newArr = [];
 
     for(var i = 0; i < lineCoordinates.length; i++){
@@ -302,6 +309,8 @@ function drawLineOnMap(map, latitude, longitude, geoCodeArrayToAddTo) {
     var coordinatePair = [latitude, longitude];
     geoCodeArrayToAddTo.push(coordinatePair);
 
+    //if(geoCodeArrayToAddTo.length > 200) geoCodeArrayToAddTo = runDouglasPeuckerOnGeoArrayList(geoCodeArrayToAddTo);
+
     clearLinesFromMap();
 
     var polyLine = L.polyline(geoCodeArrayToAddTo,
@@ -313,6 +322,9 @@ function drawLineOnMap(map, latitude, longitude, geoCodeArrayToAddTo) {
         }
     ).addTo(map);
 
+    polyLine.options.smoothFactor=1.0;
+    polyLine.redraw();
+
     var polylineBufferLine = L.polyline(geoCodeArrayToAddTo,
         {
             color: 'blue',
@@ -321,6 +333,8 @@ function drawLineOnMap(map, latitude, longitude, geoCodeArrayToAddTo) {
             lineJoin: 'round'
         }
     ).addTo(map);
+    polylineBufferLine.options.smoothFactor=1.0;
+    polylineBufferLine.redraw();
 
     map.fitBounds(polyLine.getBounds());
 }
@@ -476,5 +490,22 @@ function clearLinesFromMap() {
                 console.log("problem with " + e + map._layers[i]);
             }
         }
+    }
+}
+
+/*
+    @Description    Returns a more simplified array of geocodes by utilizing the Douglas Peucker algorithm
+                    Points are removed from the array but the same general line is still drawn
+                    The greatly reduces load on the browser while recording many geocodes
+    @param          geoArrayList an array of geo codes e.g. [[0,1], [0,1]]
+*/
+function runDouglasPeuckerOnGeoArrayList(geoArrayList){
+    if(typeof(geoArrayList) !== 'undefined' && geoArrayList.length > 2){
+        var flattenedGeoArrayList = convert2DArrayTo1D(geoArrayList);
+        var optimizedArray = simplify(flattenedGeoArrayList);
+        return convertArrayTo2D(optimizedArray);
+    }
+    else{
+        return geoArrayList;
     }
 }
