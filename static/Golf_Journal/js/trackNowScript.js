@@ -6,6 +6,9 @@ var recordingStartTime;
 var geoCodesCurrentlyBeingTracked = [];
 var markersLayer; //The markerLayer holds all markers added to the map, used to easily clear
 var trackingStartMarkerDrawn = true; //stores wheter the tracking marker has been drawn or not yet
+var currentLat;
+var currentLong;
+var intervalId;
 
 window.onload = function(){
     markersLayer = new L.LayerGroup();
@@ -14,6 +17,24 @@ window.onload = function(){
     getGameRecordById();
     populateGolfGameHolesTable();
     addTableClickListeners();
+
+    //Extend Polyline to add distance method
+    L.Polyline = L.Polyline.include({
+        getDistance: function(system) {
+            // distance in meters
+            var mDistanse = 0,
+                length = this._latlngs.length;
+            for (var i = 1; i < length; i++) {
+                mDistanse += this._latlngs[i].distanceTo(this._latlngs[i - 1]);
+            }
+            // optional
+            if (system === 'imperial') {
+                return mDistanse / 1609.34;
+            } else {
+                return mDistanse / 1000;
+            }
+    }
+});
 }
 /*
     @Description    Makes an AJAX call to Postgres database to retrieve current users Game entry by Id
@@ -114,6 +135,8 @@ function saveCourseHole(){
     			geo.clearWatch(watchId);
                 showStartTrackingButton();
                 var lastEnteredCoOrds = geoCodesCurrentlyBeingTracked[geoCodesCurrentlyBeingTracked.length-1];
+                //Clear any saved geocodes so we can start tracking from fresh
+                geoCodesCurrentlyBeingTracked = [];
                 createMapMarker(map, 'Current Location', lastEnteredCoOrds[0], lastEnteredCoOrds[1], false);
                 populateGolfGameHolesTable();
     		}
@@ -202,17 +225,20 @@ function getCurrentLocation(){
     if(geo){
         geo.getCurrentPosition(initMapWithCurrentLocation, geoInfoErrorCallback, {timeout:10000, enableHighAccuracy:true});
     }
+    else{
+        alert('Geolocation is not avaiable, please try to refresh the page!');
+    }
 }
 
 /*
     @Description    Begins tracking a users GeoLocation for movement
+                    Clears all markers currently on map
 */
 function startGeoLocationTracking(){
     console.log('Tracking started!');
 
     markersLayer.clearLayers();
     trackingStartMarkerDrawn = false;
-    //The success callback method is called whenever a users position is updated
     watchId = geo.watchPosition(setCurrentLocationOnMap, geoInfoErrorCallback, {timeout:10000, enableHighAccuracy:true});
     showStopTrackingButton();
 }
@@ -224,6 +250,7 @@ function stopGeoLocationTracking(){
     console.log('Tracking stopped!');
     markersLayer.clearLayers();
     clearLinesFromMap();
+    clearInterval(intervalId);
     saveCourseHole();
 }
 
@@ -238,14 +265,32 @@ function initMapWithCurrentLocation(position) {
 
 /*
     @Description    Sets the current location on the Map when a user first open the TrackNow functionality
+                    Starts a timer that stores the users location every 10 seconds
 */
 function setCurrentLocationOnMap(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    drawLineOnMap(map, latitude, longitude, geoCodesCurrentlyBeingTracked);
+    //Set class level lat and long values so can be read by time based action
+    currentLat = position.coords.latitude;
+    currentLong = position.coords.longitude;
+
+
+    //Draw the initial marker and start the line, this will only be called when tracking first starts
     if(!trackingStartMarkerDrawn){
-        createMapMarker(map, "Tee Off", latitude, longitude, false);
+        drawLineOnMap(map, currentLat, currentLong, geoCodesCurrentlyBeingTracked);
+        createMapMarker(map, "Tee Off", currentLat, currentLong, false);
         trackingStartMarkerDrawn = true;
+
+        //Start the timer that will store the users geolocation every x seconds
+        intervalId = setInterval(addCurrentPositionToPolyline, 10000);
+    }
+}
+
+/*
+    @Description    adds a geocode to the line being drawn on the map
+                    Called on a timer to draw new line Coordinates
+*/
+function addCurrentPositionToPolyline(){
+    if(typeof(currentLat) != 'undefined' && typeof(currentLong) != 'undefined'){
+        drawLineOnMap(map, currentLat, currentLong, geoCodesCurrentlyBeingTracked);
     }
 }
 
@@ -306,37 +351,40 @@ function showMarkerBaloon(e) {
     @param          latitude - the latitude value to add to mapLineCoordinates
 */
 function drawLineOnMap(map, latitude, longitude, geoCodeArrayToAddTo) {
+    console.log('geoCodesCurrentlyBeingTracked: ' , geoCodesCurrentlyBeingTracked);
+
     var coordinatePair = [latitude, longitude];
-    geoCodeArrayToAddTo.push(coordinatePair);
 
-    //if(geoCodeArrayToAddTo.length > 200) geoCodeArrayToAddTo = runDouglasPeuckerOnGeoArrayList(geoCodeArrayToAddTo);
+    if(geoCodeArrayToAddTo.length < 2 || positionChanged(geoCodeArrayToAddTo, coordinatePair)){
 
-    clearLinesFromMap();
+        geoCodeArrayToAddTo.push(coordinatePair);
 
-    var polyLine = L.polyline(geoCodeArrayToAddTo,
-        {
-            color: 'blue',
-            weight: 3,
-            opacity: 5,
-            lineJoin: 'round'
-        }
-    ).addTo(map);
+        //if(geoCodeArrayToAddTo.length > 200) geoCodeArrayToAddTo = runDouglasPeuckerOnGeoArrayList(geoCodeArrayToAddTo);
 
-    polyLine.options.smoothFactor=1.0;
-    polyLine.redraw();
+        clearLinesFromMap();
 
-    var polylineBufferLine = L.polyline(geoCodeArrayToAddTo,
-        {
-            color: 'blue',
-            weight: 23,
-            opacity: 0.3,
-            lineJoin: 'round'
-        }
-    ).addTo(map);
-    polylineBufferLine.options.smoothFactor=1.0;
-    polylineBufferLine.redraw();
+        var polyLine = L.polyline(geoCodeArrayToAddTo,
+            {
+                color: 'blue',
+                weight: 3,
+                opacity: 5,
+                lineJoin: 'round'
+            }
+        ).addTo(map);
 
-    map.fitBounds(polyLine.getBounds());
+        console.log('Distance: ' + polyLine.getDistance());
+
+        var polylineBufferLine = L.polyline(geoCodeArrayToAddTo,
+            {
+                color: 'blue',
+                weight: 23,
+                opacity: 0.3,
+                lineJoin: 'round'
+            }
+        ).addTo(map);
+
+        map.fitBounds(polylineBufferLine.getBounds());
+    }
 }
 
 /*
@@ -374,6 +422,20 @@ function drawGeoCodeListOnMap(geoArray, holeNumber) {
     var endLong = geoArray[geoArray.length-1][1];
     createMapMarker(map, 'Start Hole ' + holeNumber, startLat, startLong, false);
     createMapMarker(map, 'End Hole ' + holeNumber, endLat, endLong, false);
+}
+
+/*
+    @Description    Compares a new geocode to the last geocode recorded
+                    returns true if the geocodes are different, false otherwise
+*/
+function positionChanged(geoCodeArrayToAddTo, coordinatePair){
+    if(geoCodeArrayToAddTo.length > 1){
+        var geoCodes = geoCodeArrayToAddTo[geoCodeArrayToAddTo.length - 1];
+        if(geoCodes[0] != coordinatePair[0] || geoCodes[1] != coordinatePair[1]){
+            return true;
+        }
+    }
+    return false;
 }
 
 /*
@@ -509,3 +571,4 @@ function runDouglasPeuckerOnGeoArrayList(geoArrayList){
         return geoArrayList;
     }
 }
+
