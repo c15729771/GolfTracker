@@ -90,6 +90,7 @@ def saveCourseHole(request):
     gameId = request.POST.get('gameId', 'Default')
     geoCodes = request.POST.getlist('holeCoordinates[]')
     holeNumber = request.POST.get('holeName', 1)
+    distance = request.POST.get('distance', 1)
     trackingStartTime = request.POST.get('recordingStartTime', 1)
     timeAsInt = int(trackingStartTime)
     hole = Hole(
@@ -97,7 +98,8 @@ def saveCourseHole(request):
         game = Game(id=gameId),
         start_time = datetime.datetime.fromtimestamp(timeAsInt / 1e3),
         stop_time = datetime.datetime.now(),
-        geo_codes = geoCodes
+        geo_codes = geoCodes,
+        distance_yards = distance
     )
     hole.save()
     return redirect('/')
@@ -137,6 +139,11 @@ def getNewHoleModal(request):
     ]
     context = {'holeNumbers': HOLE_NUMBERS}
     return render(request, 'Golf_Journal/CreateCourseHoleModal.html', context)
+
+def getCommunityHoles(request):
+    holes = Hole.objects.all()
+    context = {'holes': holes}
+    return render(request, 'Golf_Journal/CommunityCourseTable.html', context)
 
 def edit(request, id):
     members = Member.objects.get(id=id)

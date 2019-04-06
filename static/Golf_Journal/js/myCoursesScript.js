@@ -32,6 +32,10 @@ function populateGolfGamesTable(csrftoken){
 		},
 		success: function(response){
 			$('#golfCourseTable').html(response);
+			$('#golfCourseTableId').DataTable( {
+                    searching: false,
+                    responsive: true
+            } );
 		}
     });
 }

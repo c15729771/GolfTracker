@@ -1,9 +1,9 @@
-<table class="table table-bordered table-hover" id="courseHoleTableId">
+<table class="table table-bordered table-hover" id="communityCourseTableId">
     <thead class="alert-success">
         <tr>
+            <th>User</th>
+            <th>Course Name</th>
             <th>Hole Number</th>
-            <th>Start Time</th>
-            <th>Stop Time</th>
             <th>Distance</th>
             <th>Action</th>
         </tr>
@@ -11,13 +11,12 @@
     <tbody>
         {% for hole in holes %}
         <tr>
+            <td>{{ hole.game.user.username }}</td>
+            <td>{{ hole.game.courseName }}</td>
             <td>{{ hole.hole_number }}</td>
-            <td>{{ hole.start_time }}</td>
-            <td>{{ hole.stop_time }}</td>
             <td>{{ hole.distance_yards}} Yards</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Actions">
-                  <button type="button" name="{{ hole.id }}" class="btn btn-secondary delete delete-hole-event">Delete</button>
                   <button type="button" name="{{ hole.id }}" class="btn btn-secondary show-on-map-event">Show on Map</button>
                 </div>
             </td>

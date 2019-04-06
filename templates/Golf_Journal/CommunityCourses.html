@@ -1,5 +1,6 @@
 
 {% extends 'Golf_Journal/base.html' %}
+{% load static %}
   {% block head %}
     <section id="intro" class="wrapper style1 fullscreen fade-up community">
       <div class="inner">
@@ -12,4 +13,25 @@
 
 {% block content %}
 
+    <div class="container fill">
+        <div id="map">
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+                  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+                  crossorigin=""/>
+        </div>
+    </div>
+
+<!-- Table for displaying all course holes that have been played -->
+    <div class="table-wrapper-scroll-y table-scrollbar" id="communityCourseTableDiv"></div>
+
 {% endblock content %}
+
+{% block js %}
+    {{ block.super }} {# includes previous content in block #}
+    <script src="{% static 'Golf_Journal/js/sharedMappingMethods.js' %}"></script>
+    <script src="{% static 'Golf_Journal/js/communityCoursesScript.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+                    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+                    crossorigin="">
+    </script>
+{% endblock js %}

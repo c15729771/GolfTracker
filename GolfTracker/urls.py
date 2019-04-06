@@ -23,6 +23,8 @@ urlpatterns = [
     path('TrackNow/saveCourseHole', views.saveCourseHole, name='saveCourseHole'),
     path('TrackNow/deleteGameHole', views.deleteGameHole, name='deleteGameHole'),
     path('TrackNow/getHoleCoordinates', views.getHoleCoordinates, name='getHoleCoordinates'),
+    path('CommunityCourses/getHoleCoordinates', views.getHoleCoordinates, name='getHoleCoordinates'),
+    path('CommunityCourses/getCommunityHoles', views.getCommunityHoles, name='getCommunityHoles'),
     path('', include('pwa.urls')),
     url(r'^create$', views.create, name='create'),
     url(r'^read$', views.read, name='read'),

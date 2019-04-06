@@ -12,10 +12,11 @@
 {% endblock %}
 
 {% block content %}
+    </br>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCourseModal">Add New Course</button>
 
     <!-- Table for displaying users current golf courses -->
-    <div id="golfCourseTable"></div>
+    <div class="table-wrapper-scroll-y table-scrollbar" id="golfCourseTable"></div>
 
     <!-- Modal for allowing users to create new course-->
     <div class="modal fade bd-example-modal-lg" id="createCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

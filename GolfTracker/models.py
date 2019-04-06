@@ -51,3 +51,4 @@ class Hole(models.Model):
     start_time = models.DateTimeField()
     stop_time = models.DateTimeField()
     geo_codes = ArrayField(models.DecimalField(max_digits=9, decimal_places=6))
+    distance_yards = models.DecimalField(max_digits=12, decimal_places=2)
