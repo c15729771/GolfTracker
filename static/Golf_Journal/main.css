@@ -407,7 +407,7 @@ color: #45BF55;
 
   /* Footer */
 footer{
-  position: fixed;
+  /*position: fixed;*/
   left: 0;
   bottom: 0;
   padding: 20px;

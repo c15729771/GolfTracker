@@ -13,7 +13,7 @@ def register(request):
         if form.is_valid():
             form.save()  # Saves entered user to admin page
             username = form.cleaned_data.get('username')
-            messages.success(request, f'You are now registered and can now able login!')
+            messages.success(request, f'You are now registered and can now login!')
             return redirect('login')
     else:
         form = UserRegisterForm()

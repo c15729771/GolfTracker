@@ -161,7 +161,7 @@ MEDIA_URL = '/media/'
 #     os.path.join(BASE_DIR, "static")
 # ]
 
-LOGIN_REDIRECT_URL = 'Golf-Journal-TrackNow'
+LOGIN_REDIRECT_URL = 'Golf-Journal-index'
 LOGIN_URL = '/login/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
