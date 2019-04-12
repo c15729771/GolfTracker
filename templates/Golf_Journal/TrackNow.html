@@ -1,15 +1,21 @@
 {% extends 'Golf_Journal/base.html' %}
 {% load static %}
 {% block head %}
-    <div class="tracking" id="trackingHeaderDiv">
-        <h1>Track Your Game</h1>
-    </div>
-{% endblock %}
-{% block content %}
-    <!-- Div for table of recorded holes for this course -->
-    <div class="table-wrapper-scroll-y table-scrollbar" id="courseHoleTable"></div>
-
-    <div class="container fill">
+    <section id="intro" class="wrapper style1 fullscreen fade-up trackNow">
+        <div class="inner">
+            <h1 class="mycourses-primary">
+                <span class="mycourses-primary-main">Track Now</span>
+            </h1>
+            <h3 class="mycourses-primary-2">
+                <span class="mycourses-primary-main-2">Before you start tracking, make sure you have a created a course first</span>
+            </h3>
+            <a href="{% url 'Golf-Journal-MyCourses' %}"><button class="btn">Try it out!</button></a>
+        </div>
+        <div class="arrow bounce">
+            <a class="fa fa-arrow-down fa-2x" href="#"></a>
+        </div>
+    </section>
+     <div class="container fill">
         <div id="map">
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
                   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -22,6 +28,11 @@
             <button class="btn btn-destructive" onclick="stopGeoLocationTracking()">Stop Tracking</button>
         </div>
     </div>
+
+{% endblock %}
+{% block content %}
+    <!-- Div for table of recorded holes for this course -->
+    <div class="table-wrapper-scroll-y table-scrollbar" id="courseHoleTable"></div>
 
     <!-- Div to render course hole creation -->
     <div id='createCourseHoleModalDiv'></div>

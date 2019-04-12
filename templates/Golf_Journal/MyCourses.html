@@ -7,13 +7,16 @@
                 <span class="mycourses-primary-main">My Courses</span>
             </h1>
         </div>
+        <div class="arrow bounce">
+            <a class="fa fa-arrow-down fa-2x" href="#"></a>
+        </div>
     </section>
 
 {% endblock %}
 
 {% block content %}
     </br>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCourseModal">Add New Course</button>
+    <button type="button" class="btn" data-toggle="modal" data-target="#createCourseModal">Add New Course</button>
 
     <!-- Table for displaying users current golf courses -->
     <div class="table-wrapper-scroll-y table-scrollbar" id="golfCourseTable"></div>

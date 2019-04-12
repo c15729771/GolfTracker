@@ -1,14 +1,10 @@
 
 {% extends "Golf_Journal/base.html" %}
 {% block content %}
-  <h1>You have been logged out</h1>
-      <div class="border-top pt-3">
-          <small class="text-muted">
-             <a href="{% url 'login'%}">Log in Again</a>
-          </small>
+      <div class="border-top pt-5">
+            <h1>You have been logged out</h1>
+        <div class="log-button">
+             <a href="{% url 'login'%}"><button class="btn">Log in Again</button></a>
+        </div>
       </div>
-
-	<footer>
-		<p>GolfJournal, Copyright &copy; 2019</p>
-	</footer>
 {% endblock content %}
